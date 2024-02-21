@@ -1,10 +1,3 @@
-//
-//  WeatherView.swift
-//  PORApp
-//
-//  Created by ituser on 1/31/24.
-//
-
 import SwiftUI
 
 struct WeatherView: View {
@@ -23,21 +16,27 @@ struct WeatherView: View {
         case 54:
             return "🌦️" // Sun behind cloud
         case 60:
-            return "☁️" // Rain
+            return "☁️" // partly cloudy
         case 62:
+            return "🌧️" // little Rain
+        case 63:
             return "🌧️" // Rain
+        case 65:
+            return "⛈️" // thunderstorm
         case 93:
-            return "🌧️" // Rain
+            return "❄️"// cold
+        case 80:
+            return "💨" // Strong wind
         default:
-            print("\(icon)")
+        print("\(icon)")
             return "❓"
         }
-        //TODO: complete the weather competition
-        //reference: https://www.hko.gov.hk/tc/weatherAPI/doc/files/HKO_Open_Data_API_Documentation_tc.pdf
     }
     
     var body: some View {
         NavigationStack {
+            Color(.systemGray6)
+                .edgesIgnoringSafeArea(.all)
             if let weatherData = weatherData {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack{

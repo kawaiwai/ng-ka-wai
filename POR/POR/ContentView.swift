@@ -6,8 +6,6 @@ struct ContentView: View {
     //  @State var changeScreen = true
     var body: some View {
         NavigationStack {
-            Color(.systemGreen)
-                .edgesIgnoringSafeArea(.all)
             VStack(spacing: 50) {
                 Image("park")
                     .resizable()
