@@ -12,7 +12,7 @@ var person: Person // Assuming you have a Person model
  
  var body: some View {
      VStack(spacing: 20) {
-         Image(systemName: "person")
+         Image(systemName: "person.fill")
              .font(.system(size: 100))
              .foregroundColor(.blue)
          
