@@ -8,7 +8,7 @@ import Foundation
 import LocalAuthentication
 class BiometricModel : ObservableObject {
     let context = LAContext()
-    @Published var isError = false
+    @Published var isError = true
     @Published var errorMessage = ""
     @Published var isAuthenicated = false
     func checkPolicy() {
