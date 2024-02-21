@@ -42,7 +42,8 @@ struct ParksView: View {
     @State var navigationPath = [Park]()
     var body: some View {
         NavigationStack(path: $navigationPath) {
-            
+            Color(.systemGray4)
+                .edgesIgnoringSafeArea(.all)
             List(parks) {
                 park in
                 
