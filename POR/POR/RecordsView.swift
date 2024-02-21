@@ -1,94 +1,100 @@
-//
-//  RecordsView.swift
-//  PORApp
-//
-//  Created by ituser on 1/31/24.
-//
-
 import SwiftUI
 
-
-struct Record : Codable, Identifiable {
+struct Record: Codable, Identifiable {
     var id = UUID().uuidString
     var title: String
-    var content : String
-    
-    
-    static func json(records : [Record]) -> String {
+    var content: String
+
+    static func json(records: [Record]) -> String {
         do {
             let data = try JSONEncoder().encode(records)
             let string = String(data: data, encoding: .utf8)
             return string ?? "[]"
-        } catch _ {
-            
+        } catch {
+            print("Error encoding records: \(error)")
         }
         return "[]"
     }
-    
-    static func get(string : String) -> [Record]{
+
+    static func get(string: String) -> [Record] {
         do {
             if let data = string.data(using: .utf8) {
                 let records = try JSONDecoder().decode([Record].self, from: data)
                 return records
             }
-        } catch _ {
-            
+        } catch {
+            print("Error decoding records: \(error)")
         }
         return []
     }
 }
 
 struct RecordsView: View {
-    
-    @AppStorage("records") var recordJSON : String = ""
-    @State var records : [Record] = []
-    @State var title : String = ""
-    @State var content : String = ""
+    @AppStorage("records") var recordJSON: String = ""
+    @State var records: [Record] = []
+    @State var title: String = ""
+    @State var content: String = ""
+
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack {
                 HStack {
-                    TextField("title", text: $title).textFieldStyle(.roundedBorder)
-                    TextField("content", text: $content).textFieldStyle(.roundedBorder)
+                    TextField("Date", text: $title)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    TextField("Place", text: $content)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
-                        records.append(Record(title: title, content: content))
-                        title = ""
-                        content = ""
-                        save()
-                    }, label: {
-                        Text("Add")
-                    }).padding()
-                }.padding()
-                List {
-                    
-                    ForEach(records) {
-                        record in
-                        VStack (alignment: .leading){
-                            Text("\(record.title)")
-                                .font(.headline)
-                            Text("\(record.content)")
-                        }.padding(5)
-                    }.onDelete(perform: { indexSet in
-                        records.remove(atOffsets: indexSet)
-                        save()
-                    })
+                        addRecord()
+                    }) {
+                        Label("", systemImage: "plus")
+                    }
+                    .padding()
                 }
-                .listStyle(.grouped)
-                .navigationTitle("My Records")
+                .padding()
+
+                List {
+                    ForEach(records) { record in
+                        VStack(alignment: .leading) {
+                            Text(record.title)
+                                .font(.headline)
+                                .foregroundColor(.green)
+                            Text(record.content)
+                        }
+                        .padding(5)
+                    }
+                    .onDelete(perform: deleteRecord)
+                }
+                .listStyle(GroupedListStyle())
+                .navigationTitle("Hit the Park Records")
+                
             }
         }
         .onAppear {
             self.records = Record.get(string: recordJSON)
         }
     }
-    
+
+    func addRecord() {
+        guard !title.isEmpty && !content.isEmpty else { return }
+
+        records.append(Record(title: title, content: content))
+        title = ""
+        content = ""
+        save()
+    }
+
+    func deleteRecord(at offsets: IndexSet) {
+        records.remove(atOffsets: offsets)
+        save()
+    }
+
     func save() {
         self.recordJSON = Record.json(records: self.records)
     }
 }
 
-struct RecordsView_Preview : PreviewProvider {
+struct RecordsView_Preview: PreviewProvider {
     static var previews: some View {
-        RecordsView(records: [])
+        RecordsView()
     }
 }

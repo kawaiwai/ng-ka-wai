@@ -42,7 +42,7 @@ struct ParksView: View {
     @State var navigationPath = [Park]()
     var body: some View {
         NavigationStack(path: $navigationPath) {
-            Color(.systemGray4)
+            Color.teal.opacity(0.3)
                 .edgesIgnoringSafeArea(.all)
             List(parks) {
                 park in
@@ -83,7 +83,8 @@ struct ParksView: View {
                 
             }
             .listStyle(.grouped)
-            .navigationTitle("Parks")
+            .navigationTitle("List of Park")
+            
             .navigationDestination(for: Park.self, destination: {
                 park in
                 

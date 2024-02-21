@@ -63,7 +63,10 @@ struct ParkView: View {
                     .buttonStyle(.borderedProminent)
                     .tint(.green)
                 }
-                
+                Text("Park Facilities")
+                    .padding()
+                    .background(.yellow)
+                    .font(.headline)
                 
                 Text(park.facilitiesEn.replacingOccurrences(of: "<br />", with: "\n\n"))
                     .padding()

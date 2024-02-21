@@ -57,6 +57,7 @@ struct WeatherView: View {
                                     HStack {
                                         Text("Temperature: \(forecast.forecastMintemp.value)°\(forecast.forecastMintemp.unit) - \(forecast.forecastMaxtemp.value)°\(forecast.forecastMaxtemp.unit) ")
                                             .font(.system(size: 10))
+                                            .foregroundStyle(.brown)
                                         Spacer()
                                     }
                                     HStack {
@@ -74,10 +75,10 @@ struct WeatherView: View {
                     }
                     .padding(.horizontal)
                 }
-                .navigationTitle("Weather Forecast")
+                .navigationTitle("Future Weather Report")
             } else {
                 Text("No weather data")
-                    .navigationTitle("Weather Forecast")
+                    .navigationTitle("Future Weather Report")
             }
             
         }

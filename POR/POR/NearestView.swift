@@ -19,7 +19,7 @@ struct NearestView: View {
                     
                     //Make it looks better
                     VStack {
-                        Text("Neartest Park")
+                        Text("Surrounding Park")
                         Text("\(nearestPark.nameEn)")
                             .font(.headline)
                         
@@ -45,13 +45,14 @@ struct NearestView: View {
                         .buttonStyle(.borderedProminent)
                         .tint(.green)
                     }
-                        .navigationTitle("Nearest Park")
+                        .navigationTitle("Surrounding Park")
                 } else {
                     Text("No Nearest Park")
-                        .navigationTitle("Nearest Park")
+                        .navigationTitle("Surrounding Park")
                 }
             } else {
-                Text("No Location Avaliable")
+                Text("No Location Avaliable !!")
+                    .foregroundStyle(.red)
             }
         } .onAppear() {
             locationModel.requestPermission()
