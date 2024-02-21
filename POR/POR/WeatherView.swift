@@ -35,7 +35,6 @@ struct WeatherView: View {
     
     var body: some View {
         NavigationStack {
-            Color(.systemGray6)
             if let weatherData = weatherData {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack{
@@ -49,18 +48,18 @@ struct WeatherView: View {
                                 VStack {
                                     
                                     HStack {
-                                        Text("\(forecast.forecastDate) (\(forecast.week))")
-                                            .font(.system(size: 10, weight: .semibold))
-                                        Spacer()
-                                    }
-                                    HStack {
-                                        Text("Temperature: \(forecast.forecastMintemp.value)°\(forecast.forecastMintemp.unit) - \(forecast.forecastMaxtemp.value)°\(forecast.forecastMaxtemp.unit) ")
-                                            .font(.system(size: 10))
+                                        Text("Date: \(forecast.forecastDate) (\(forecast.week))")
+                                            .font(.system(size: 15, weight: .semibold))
                                             .foregroundStyle(.brown)
                                         Spacer()
                                     }
                                     HStack {
-                                        Text("Relative Humidity: \(forecast.forecastMinrh.value)% - \(forecast.forecastMaxrh.value)%").font(.system(size: 10))
+                                        Text("Temperature: \(forecast.forecastMintemp.value)°\(forecast.forecastMintemp.unit) - \(forecast.forecastMaxtemp.value)°\(forecast.forecastMaxtemp.unit) ")
+                                            .font(.system(size: 15))
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Text("Relative Humidity: \(forecast.forecastMinrh.value)% - \(forecast.forecastMaxrh.value)%").font(.system(size: 15))
                                         Spacer()
                                     }
                                 }

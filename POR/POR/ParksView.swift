@@ -42,7 +42,6 @@ struct ParksView: View {
     @State var navigationPath = [Park]()
     var body: some View {
         NavigationStack(path: $navigationPath) {
-            Color.teal.opacity(0.3)
             List(parks) {
                 park in
                 
@@ -74,6 +73,7 @@ struct ParksView: View {
                             .font(.headline)
                         Text("\(park.addressEn)")
                             .font(.footnote)
+                            .foregroundStyle(.teal)
                     }
                 }
 
