@@ -20,11 +20,11 @@ struct MainView: View {
                 .tabItem { Label("Weather", systemImage: "sun.max.fill") }
             NearestView(parks: $parks)
                 .tabItem { Label("Nearby", systemImage: "location.fill") }
-            
+            RecordsView()
+                .tabItem { Label("Records", systemImage: "folder.fill") }
             MyView()
                 .tabItem { Label("Account", systemImage: "person.circle.fill") }
-            RecordsView()
-                .tabItem { Label("Records", systemImage: "list.bullet.fill") }
+            
         }
         .onAppear() {
             parkData.fetch({
