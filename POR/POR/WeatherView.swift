@@ -36,7 +36,6 @@ struct WeatherView: View {
     var body: some View {
         NavigationStack {
             Color(.systemGray6)
-                .edgesIgnoringSafeArea(.all)
             if let weatherData = weatherData {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack{

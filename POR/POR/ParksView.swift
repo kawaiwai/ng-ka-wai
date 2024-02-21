@@ -43,7 +43,6 @@ struct ParksView: View {
     var body: some View {
         NavigationStack(path: $navigationPath) {
             Color.teal.opacity(0.3)
-                .edgesIgnoringSafeArea(.all)
             List(parks) {
                 park in
                 

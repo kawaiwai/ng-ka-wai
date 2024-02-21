@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct Record: Codable, Identifiable {
+struct ParkRecord: Codable, Identifiable {
     var id = UUID().uuidString
     var title: String
     var content: String
 
-    static func json(records: [Record]) -> String {
+    static func json(records: [ParkRecord]) -> String {
         do {
             let data = try JSONEncoder().encode(records)
             let string = String(data: data, encoding: .utf8)
@@ -16,10 +16,10 @@ struct Record: Codable, Identifiable {
         return "[]"
     }
 
-    static func get(string: String) -> [Record] {
+    static func get(string: String) -> [ParkRecord] {
         do {
             if let data = string.data(using: .utf8) {
-                let records = try JSONDecoder().decode([Record].self, from: data)
+                let records = try JSONDecoder().decode([ParkRecord].self, from: data)
                 return records
             }
         } catch {
@@ -31,7 +31,7 @@ struct Record: Codable, Identifiable {
 
 struct RecordsView: View {
     @AppStorage("records") var recordJSON: String = ""
-    @State var records: [Record] = []
+    @State var records: [ParkRecord] = []
     @State var title: String = ""
     @State var content: String = ""
 
@@ -70,14 +70,14 @@ struct RecordsView: View {
             }
         }
         .onAppear {
-            self.records = Record.get(string: recordJSON)
+            self.records = ParkRecord.get(string: recordJSON)
         }
     }
 
     func addRecord() {
         guard !title.isEmpty && !content.isEmpty else { return }
 
-        records.append(Record(title: title, content: content))
+        records.append(ParkRecord(title: title, content: content))
         title = ""
         content = ""
         save()
@@ -89,7 +89,7 @@ struct RecordsView: View {
     }
 
     func save() {
-        self.recordJSON = Record.json(records: self.records)
+        self.recordJSON = ParkRecord.json(records: self.records)
     }
 }
 
